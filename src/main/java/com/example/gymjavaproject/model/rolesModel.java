@@ -1,19 +1,22 @@
 package com.example.gymjavaproject.model;
 
+import jakarta.persistence.*;
+import lombok.NoArgsConstructor;
 import org.hibernate.annotations.UuidGenerator;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.List;
 
+@Entity
 @Getter
 @Setter
 @AllArgsConstructor
-public class rolesModelDto {
+@NoArgsConstructor
+@Table(name = "roles")
+public class rolesModel {
 
     @Id
     @GeneratedValue(generator = "uuid")
@@ -22,6 +25,12 @@ public class rolesModelDto {
     private String id;
 
     @Column(nullable = false, length = 150)
-    private String nombreRol;   
+    private String nombreRol;
+
+    @Column(length = 250)
+    private String despcripcion;
+
+    @OneToMany(mappedBy = "rol")
+    private List<userModel> user;
 
 }

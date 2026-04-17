@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.UuidGenerator;
 
+import java.time.LocalDateTime;
+
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
@@ -50,5 +52,14 @@ public class userModel {
 
     @Column(nullable = false)
     private String email;
+
+    @ManyToOne
+    @JoinColumn(name = "rol", nullable = false)
+    private rolesModel rol;
+
+    @Column(name = "created_at")
+    @Builder.Default
+    private LocalDateTime createdAt = LocalDateTime.now();
+
 
 }
